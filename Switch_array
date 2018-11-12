@@ -1,0 +1,75 @@
+int myValues[8] = {10, -10, 18, 17, 200, 51, 33, 73};
+int beregnet;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin (9600);
+
+}
+
+void loop() {
+  // Legger sammen alle values
+   Serial.println("");
+   for(int x = 0; x <= 9; x++)
+   {
+   switch (x) {
+    case 0:
+        Serial.print("Ganger verdi 0 med 3");
+        Serial.print(" ""Svar=");
+        Serial.print(myValues[0] * 3); //Ganger verdien 0 med 3
+        Serial.println("");
+   break;
+    case 1:
+        Serial.print("absoluttverdi av verdi 1");
+        Serial.print(" ""Svar=");
+        Serial.print(abs(myValues[1])); //absolut verdi av verdi 1
+        Serial.println("");
+   break;
+    case 2:
+        Serial.print("(Verdi1)*5/4");
+        Serial.print(" ""Svar=");
+        Serial.print(float(myValues[2]*5/4)); //Ganger verdi 2 med 5 og så deler den på 4
+        Serial.println("");
+   break;
+    case 3:
+        Serial.print("Verdi 3 opphøyd i 3");
+        Serial.print(" ""Svar=");
+        Serial.print(float(pow(myValues[3], 3))); //Verdi 3 opphøyd i 3
+        Serial.println("");
+   break;
+    case 4:
+        Serial.print("Kvadratroten av verdi 4");
+        Serial.print(" ""Svar=");
+        Serial.print(sqrt(myValues[4])); //Kvadratroten av verdi 4
+        Serial.println("");
+   break;
+    case 5:
+        Serial.print("Rest eter helttallsdivisjon");
+        Serial.print(" ""Svar=");
+        Serial.print(float(myValues[5]%4));
+        Serial.println("");
+   break;
+    case 6:
+        beregnet = -32768;
+        for(int i=0; i<9; i++) {
+        beregnet = max(beregnet,myValues[i]);  
+        }
+        Serial.print(String(x) + "Største verdien er " + String(beregnet));
+        Serial.println("");
+   break;
+    case 7:
+        Serial.print("Verdi deles på 2");
+        Serial.print(" ""Svar=");
+        Serial.print(myValues[7]/2);
+        Serial.println("");
+   break;
+   default:
+   break;  
+    
+   }
+   
+   
+   }
+   Serial.end();
+   
+}
