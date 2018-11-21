@@ -25,6 +25,12 @@ void setup() {
 
 void loop() {
     unsigned long currentTime = millis();
+    //Caller void loop hvert 30 sekund for å unngå at programmet bugger seg
+    //Hvis ikke dette blir gjort får man til slutt bare dimmet opp og ned, ikke slått lyset direkte av eller på
+    if (currentTime >= 30000) { 
+      loop();   
+    }
+    
     
     int ON_INC = digitalRead(GreenB);
     int OFF_DEC = digitalRead(RedB);
@@ -39,7 +45,7 @@ void loop() {
       //Sjekker om ON-button har vært holdt nede lenge nok
       if ((currentTime - ON_LASTPRESS) >= Delay_time) {
         //Dimmer lyset opp så lenge ON-button er holdt nede etter forrige if-statement
-        while (digitalRead(GreenB) == LOW && dim_val == min(dim_val, 254))
+        while (digitalRead(GreenB) == LOW && dim_val == min(dim_val, 254) && dim_val < 255)
         {
         dim_val++;
         Serial.println(dim_val);
@@ -60,6 +66,7 @@ void loop() {
     Serial.print(currentTime - ON_LASTPRESS);
     //Setter verdi til 255, lys på
     analogWrite(Ledpin, 255);
+    dim_val = 255;
   }
   ON_LASTSTATE = false;
   }
@@ -73,14 +80,14 @@ void loop() {
           OFF_LASTSTATE = true;
        }
       //Sjekker om OFF-button har vært holdt nede lenge nok
-      if ((currentTime - OFF_LASTPRESS) > Delay_time && OFF_LASTSTATE == true) {
+      if ((currentTime - OFF_LASTPRESS) > Delay_time && OFF_LASTSTATE == true && dim_val <=255) {
         //Dimmer lyset ned så lenge OFF-button er holdt nede etter forrige if-statement
         while (digitalRead(RedB) == LOW && dim_val == max(dim_val, 1))
         {
         dim_val--;
         Serial.println(dim_val);
         analogWrite(Ledpin, dim_val);
-        delay(20);
+        delay(10);
         }
              
       }
@@ -94,6 +101,7 @@ void loop() {
     Serial.println(" ");
     //Setter verdi til 0, lys av
     analogWrite(Ledpin, 0);
+    dim_val = 0;
   }
   OFF_LASTSTATE = false;
   }
