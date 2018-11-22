@@ -103,6 +103,7 @@ void loop() {
     //Sjekk om OFF-button er trykket
     if (OFF_DEC == LOW){
 
+      //Sjekker om OFF_LASTSTATE har endret seg til true
       if (!OFF_LASTSTATE){
           //Lagrer tiden for når av-knappen ble sist trykt.
           OFF_LASTPRESS = currentTime;
