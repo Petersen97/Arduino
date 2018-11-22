@@ -16,9 +16,9 @@
 */
 
 //konstanter
-const int Ledpin =  3;
-const int GreenB =  8;
-const int RedB   = 12;
+const int Ledpin =  3;  // Pin 3 for lys
+const int GreenB =  8;  // Pin 8 for på-knapp
+const int RedB   = 12;  // Pin 12 for av-knapp
 //Variabler
 int  dim_val;
 
