@@ -1,12 +1,14 @@
+//Dette programmet teller bits opp til verdi 15. Den benytter seg av 4 led-pærer for å vise tallene.
+//Avslått led-pære representerer verdien 0 og led-pære som lyser representerer verdien 1
+
 int LedPins[] = {5, 4, 3, 2}; //Definerer hvilke pins som skal brukes
 void setup() {
   // put your setup code here, to run once:
 
-  for (int i =0;i<4;i++) //for loop for å telle fra 0 til 3
+  for (int i =0;i<4;i++) //for-loop for å telle fra 0 til 3
   {
     pinMode(LedPins[i], OUTPUT); //Setter LedPins i array til output
   }
-  Serial.begin(9600);
 
 }
 
@@ -16,20 +18,23 @@ void loop() {
     
     for(byte x = 0; x <15; x++)//Teller fra venstre til høyre i tabellen
     {  
-      displaybinary(bitvalues[x]);//Tallet fra bitvalues arrayen blir satt inn her representert som x, tallet blir satt inn i metoden displaybinary
+      telleBits(bitvalues[x]);//Tallet fra bitvalues arrayen blir satt inn her representert som x, tallet blir satt inn i metoden displaybinary
       delay(500); //Delay er satt inn slik at den ikke skal telle så fort
     }
 
 }
 
 //Metode for å skrive ut tallet ved å bruke de fire leddiodene
-void displaybinary(byte number){
+void telleBits(byte number){
+  //Teller seg gjennom tallet i binary for å sjekke hva som er 0 og hva som er 1
   for (int i =0;i<4;i++){
 
-   if (bitRead(number, i)==0){
+   //if statement som bruker bitread for å sjekke om verdien er lik 0
+    if (bitRead(number, i)==0){ //Hvis tallet representert som i ==0 vil LEDen være slått av
     digitalWrite(LedPins[i], LOW);
    }
-   else{
+   //Hvis den ikke er ==0 vil den slå seg på
+    else{
     digitalWrite(LedPins[i], HIGH);
    }
   }
