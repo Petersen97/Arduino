@@ -21,7 +21,7 @@ const long Greeninterval = 10000;
 const long Yellowinterval = 2000;
 int ledstate = LOW;
 int lightstate = 0;
-
+int start = 0;
 
 void setup()
 {
@@ -36,10 +36,11 @@ pinMode(PedLEDred, OUTPUT);
 void loop(){
 unsigned long currentMillis = millis();
 
-if((currentMillis - previousMillis >=Yellowinterval) && (lightstate == 0)){ //Sjekker om lightstate er 0 og at det gule lyset har hatt sitt intervall
+if((currentMillis - previousMillis >=Yellowinterval) && (lightstate == 0) || (start == 0)){ //Sjekker om lightstate er 0 og at det gule lyset har hatt sitt intervall
 
     
     lightstate = 1;
+    start = 1;
 
 digitalWrite(LEDred, HIGH);
 digitalWrite(LEDyellow, LOW);
